@@ -32,8 +32,8 @@
           .linkThreeObject((links) => {
             // extend link with text sprite
             const sprite = new SpriteText(`${links.description}`); //const 변수명 변경
-            sprite.color = 'lightgrey';
-            sprite.textHeight = 5.5; //간선 텍스트 크기 조절
+            sprite.color = 'grey';
+            sprite.textHeight = 4.5; //간선 텍스트 크기 조절
             return sprite;
           })
           .linkPositionUpdate((sprite, { start, end }) => {
