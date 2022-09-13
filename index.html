@@ -45,9 +45,35 @@
             // Position sprite
             Object.assign(sprite.position, middlePos);
           });
+     
+          //img 넣어주기
+          .nodeThreeObject((node) => {
+          console.log(`node ${node.id} has image ${node.icon}`);
+          
+          const iconTexture = new THREE.TextureLoader().load(node.icon);
+          const material = new THREE.MeshBasicMaterial({
+            map: iconTexture,
+            side: THREE.DoubleSide
+          });
+          const sprite = new THREE.Sprite(material);
+          sprite.material.depthWrite = false; // .depthWrite = false -> 배경 투명하게
+          sprite.scale.set(17, 17);           // .scale.set( , )     -> 이미지 크기 조절
+
+          let ttt = ` `;                      
+          if (ttt) {if (node.icon == '') {ttt = `${node.id}`}}   // 이미지 없는 노드만, 텍스트 보이게 설정
+          
+          const label = new SpriteText(ttt);
+          label.material.depthWrite = false; 
+          label.color = node.color;
+          label.textHeight = 0.65;            // .textHeight -> 글자 크기 조절
+          sprite.add(label)
+
+          return sprite;
+          
+        });
 
       // Spread nodes a little wider
-      Graph.d3Force('charge').strength(-120);
+      Graph.d3Force('charge').strength(-500);
 
     </script>
   </body>
