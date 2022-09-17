@@ -16,7 +16,6 @@
     <script src="https://unpkg.com/three@0.143.0/build/three.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.6.5/dist/three-spritetext.min.js"></script>
     <script src="https://unpkg.com/3d-force-graph@1.70.10/dist/3d-force-graph.min.js"></script>
-    <script src="dist/CORS_errors.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   </head>
 
@@ -24,6 +23,15 @@
     <div id="3d-graph"></div>
 
     <script>
+      var app = require('express')()
+      var cors = require('cors')
+
+      // Access-Control-Allow-Origin 적용방법1: 직접 헤더에 적용
+      app.all('/*', function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*')
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With')
+        next()
+      })
    
       const Graph = ForceGraph3D()
         (document.getElementById('3d-graph'))
